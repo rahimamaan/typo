@@ -28,8 +28,8 @@ Feature: Merge Articles
 # 		And I am on the home page
 #         # Then I should not see "Introduction"
 #         Then I should see "Hello World"
-        When I go to the edit page for "Hello World"
-        Then I should see "Merge Articles"
+        # When I go to the edit page for "Hello World"
+        # Then I should see "Merge Articles"
 		
   
     Scenario: Merged articles should contain comments of original articles
