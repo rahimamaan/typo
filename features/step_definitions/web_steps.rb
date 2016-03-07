@@ -55,6 +55,34 @@ And /^I am logged into the admin panel$/ do
   end
 end
 
+Given /^the following articles? exists?:$/ do |articles|
+	articles.hashes.each do |article|
+		Article.create! article
+	end
+end
+
+Given /^the following users? exists?:$/ do |users|
+	users.hashes.each do |user|
+		User.create user
+	end
+end
+
+Given /^the following comments? exists?:$/ do |comments|
+	comments.hashes.each do |comment|
+		Comment.create comment
+	end
+end
+
+Given /^I merge articles "(.*?)" and "(.*?)"$/ do |article1, article2|
+  article = Article.find(article1)
+  article.merge_with(article2)
+end
+
+# Then /^I merge with (.*?)"$/ do |article1|
+#   article = Article.find(article1)
+#   fill_in(merge_with, :with => 
+# end
+
 # Single-line step scoper
 When /^(.*) within (.*[^:])$/ do |step, parent|
   with_scope(parent) { When step }
