@@ -93,14 +93,12 @@ class Article < Content
   # end
   
     def merge_with (other_article_id)
-      puts other_article_id
-      puts self.id
       other_article = Article.find(other_article_id)
-      puts other_article.body
+      if other_article.nil?
+        return nil
+      end
       newArticle = Article.new(self.attributes.except("guid", "permalink", "body"))
-      newBody = self.body + "\n\n" + other_article.body
-      puts newBody
-      puts other_article.body
+      newBody = self.body + "\n" + other_article.body
       newArticle.update_attributes(:body => newBody)
       newArticle.save
       newArticle.reload

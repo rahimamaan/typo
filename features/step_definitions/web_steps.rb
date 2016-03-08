@@ -57,7 +57,7 @@ end
 
 Given /^the following articles? exists?:$/ do |articles|
 	articles.hashes.each do |article|
-		Article.create! article
+		Article.create article
 	end
 end
 

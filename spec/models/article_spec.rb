@@ -628,7 +628,28 @@ describe Article do
         article.should be == already_exist_article
       end
     end
+    
 
   end
+  
+  # describe "merge articles" do 
+  #   before :each do 
+  #     @article1 = Factory.create(:article, :body => "Life of Pablo")
+  #     @article2 = Factory.create(:article, :body => "untitled unmastered.")
+  #   end
+    
+  #   context "Successful Merge" do
+  #     post :merge, :id => @article1.id, :merge_with => @article2.id
+  #     response.should redirect_to(:action => 'edit', :id => @article1.id)
+  #   end
+    
+  #   context "Unsuccessful Merge" do
+  #     it "should redirect to index" do
+  #       post :merge, :id => @article1.id, :merge_with => 10
+  #       response.should redirect_to(:action => 'index')
+  #     end
+  #   end
+  # end
+        
 end
 

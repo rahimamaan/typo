@@ -16,22 +16,23 @@ Feature: Merge Articles
       Then I should see "Merge Articles"
       
     Scenario: Merged articles should contain text of original articles
-# 		And the following articles exist:
-# 		| id	| title         | body 	    | type    | published | 
-# 		|  1	| Hello World   | hello     | Article | true | 
-# 		|  3	| Introduction  | world     | Article | true |  
 		And the following articles exist:
-		| id	| title         | body 	       | allow_comments | type    | published |
-		|  1	| Hello World   | somethingA   | true           | Article | true |
-		|  3	| Introduction  | somethingB   | true           | Article | true | 
-# 		Given I merge articles "1" and "3"
-# 		And I am on the home page
-#         # Then I should not see "Introduction"
-#         Then I should see "Hello World"
-        # When I go to the edit page for "Hello World"
-        # Then I should see "Merge Articles"
-		
-  
+		|   id	| title           | body 	| allow_comments | type    | published |
+		|  3	| Life of Pablo   | Kanye   | true           | Article | true |
+		| 4     | untitled        | Kendrick| true           | Article | true |            
+        When I go to the edit page for "Life of Pablo"
+        Then I should see "Merge Articles"
+        When I fill in "merge_with" with "4"
+        And  I press "Merge"
+        Then I should be on the admin content page
+        Then I should see "Successfully merged articles"
+        Then I should see "Life of Pablo"
+        Then I follow "Life of Pablo"
+        Then I should see "Kanye"
+        Then I should see "Kendrick"
+        
+
+    
     Scenario: Merged articles should contain comments of original articles
 		And the following articles exist:
 		| id	| title         | body 	       | allow_comments | published | type    |
