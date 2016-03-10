@@ -71,27 +71,6 @@ class Article < Content
     end
   end
 
-  # def merge_with (other_article_id)
-  #   other_article = Article.find(other_article_id)
-  #   newArticle = Article.new(self.attributes.except("guid", "permalink"))
-  #   body = self.body + "\n\n" + other_article.body
-  #   self.update_attributes(:body => self.body + "\n\n" + other_article.body)
-  #   self.save
-  #   self.reload
-  #   other_article.comments.each do |comment|
-  #     new_comment = Comment.new(comment.attributes.except('article_id'))
-  #     new_comment.update_attributes(:article_id => self.id)
-  #     self.add_comment(new_comment)
-  #     # comment.update_attributes(:article_id => self.id)
-  #   end
-    
-  #   # self.reload
-  #   # self.destroy
-  #   other_article.delete
-  #   self.save
-  #   self
-  # end
-  
     def merge_with (other_article_id)
       other_article = Article.find(other_article_id)
       if other_article.nil?
@@ -112,30 +91,13 @@ class Article < Content
         new_comment.update_attributes(:article_id => newArticle.id)
         newArticle.add_comment(new_comment)
       end
-      # self.reload
       other_article.published = false
       self.destroy
       other_article.destroy
       newArticle
   end
 
-  
-  # def merge_with(other_article_id)
-  #   other_article = Article.find_by_id(other_article_id)
 
-  #   return if other_article.nil?
-
-  #   self.update_attributes(:body => "#{self.body}\n#{other_article.body}")
-    
-  #   other_article.comments.each do |comment|
-  #     comment.update_attributes(:article_id => self.id)
-  #   end
-
-  #   other_article.reload
-  #   other_article.destroy
-
-  #   self
-  # end
   def set_permalink
     return if self.state == 'draft'
     self.permalink = self.title.to_permalink if self.permalink.nil? or self.permalink.empty?
